@@ -1,0 +1,92 @@
+spring:
+  application:
+    name: lang-to-app
+  session:
+    store-type: redis
+    timeout: 2592000
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lang_2_app
+    username: root
+    password: 123456
+  profiles:
+    active: local
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      ttl: 3600
+      database: 0
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+    session:
+      cookie:
+        max-age: 2592000
+# springdoc-openapi
+springdoc:
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.haoge.lang2app.controller
+# knife4j
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# 监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+#langchain4j:
+#  open-ai:
+#    chat-model:
+#      api-key: API-KEY
+#      base-url: https://api.deepseek.com
+#      model-name: deepseek-chat
+#      log-requests: true
+#      log-responses: true
+#      max-tokens: 8192
+#      strict-json-schema: true
+#      response-format: json_object
+#    streaming-chat-model:
+#      api-key: API-KEY
+#      base-url: https://api.deepseek.com
+#      model-name: deepseek-chat
+#      log-requests: true
+#      log-responses: true
+#      max-tokens: 8192
+#    # 推理 AI 模型配置（用于复杂的推理任务）
+#    reasoning-streaming-chat-model:
+#      base-url: https://api.deepseek.com
+#      api-key: API-KEY
+#      model-name: deepseek-reasoner
+#      max-tokens: 32768
+#      temperature: 0.1
+#      log-requests: true
+#      log-responses: true
+#    # 智能路由 AI 模型配置（用于简单的分类任务）
+#    routing-chat-model:
+#      base-url: https://api.deepseek.com
+#      api-key: API-KEY
+#      model-name: deepseek-chat
+#      log-requests: true
+#      log-responses: true
+
+
+#cos:
+#  client:
+#    host: your-custom-domain.com
+#    secretId: your-secret-id
+#    secretKey: your-secret-key
+#    region: ap-shanghai
+#    bucket: your-bucket-name
